@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zs.elasticsearch.mapper.ProductMapper">
+  <resultMap id="BaseResultMap" type="com.zs.elasticsearch.model.Product">
+    <id column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
+    <result column="marketPrice" jdbcType="DOUBLE" property="marketprice" />
+    <result column="shopPrice" jdbcType="DOUBLE" property="shopprice" />
+    <result column="pimage" jdbcType="VARCHAR" property="pimage" />
+    <result column="isHot" jdbcType="INTEGER" property="ishot" />
+    <result column="pdesc" jdbcType="VARCHAR" property="pdesc" />
+    <result column="pflag" jdbcType="INTEGER" property="pflag" />
+    <result column="cid" jdbcType="VARCHAR" property="cid" />
+    <result column="collect" jdbcType="INTEGER" property="collect" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pid, pname, marketPrice, shopPrice, pimage, isHot, pdesc, pflag, cid, collect
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from product
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zs.elasticsearch.model.Product">
+    insert into product (pid, pname, marketPrice, 
+      shopPrice, pimage, isHot, 
+      pdesc, pflag, cid, 
+      collect)
+    values (#{pid,jdbcType=INTEGER}, #{pname,jdbcType=VARCHAR}, #{marketprice,jdbcType=DOUBLE}, 
+      #{shopprice,jdbcType=DOUBLE}, #{pimage,jdbcType=VARCHAR}, #{ishot,jdbcType=INTEGER}, 
+      #{pdesc,jdbcType=VARCHAR}, #{pflag,jdbcType=INTEGER}, #{cid,jdbcType=VARCHAR}, 
+      #{collect,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zs.elasticsearch.model.Product">
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="pname != null">
+        pname,
+      </if>
+      <if test="marketprice != null">
+        marketPrice,
+      </if>
+      <if test="shopprice != null">
+        shopPrice,
+      </if>
+      <if test="pimage != null">
+        pimage,
+      </if>
+      <if test="ishot != null">
+        isHot,
+      </if>
+      <if test="pdesc != null">
+        pdesc,
+      </if>
+      <if test="pflag != null">
+        pflag,
+      </if>
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="collect != null">
+        collect,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="pname != null">
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="marketprice != null">
+        #{marketprice,jdbcType=DOUBLE},
+      </if>
+      <if test="shopprice != null">
+        #{shopprice,jdbcType=DOUBLE},
+      </if>
+      <if test="pimage != null">
+        #{pimage,jdbcType=VARCHAR},
+      </if>
+      <if test="ishot != null">
+        #{ishot,jdbcType=INTEGER},
+      </if>
+      <if test="pdesc != null">
+        #{pdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="pflag != null">
+        #{pflag,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null">
+        #{cid,jdbcType=VARCHAR},
+      </if>
+      <if test="collect != null">
+        #{collect,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zs.elasticsearch.model.Product">
+    update product
+    <set>
+      <if test="pname != null">
+        pname = #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="marketprice != null">
+        marketPrice = #{marketprice,jdbcType=DOUBLE},
+      </if>
+      <if test="shopprice != null">
+        shopPrice = #{shopprice,jdbcType=DOUBLE},
+      </if>
+      <if test="pimage != null">
+        pimage = #{pimage,jdbcType=VARCHAR},
+      </if>
+      <if test="ishot != null">
+        isHot = #{ishot,jdbcType=INTEGER},
+      </if>
+      <if test="pdesc != null">
+        pdesc = #{pdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="pflag != null">
+        pflag = #{pflag,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null">
+        cid = #{cid,jdbcType=VARCHAR},
+      </if>
+      <if test="collect != null">
+        collect = #{collect,jdbcType=INTEGER},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zs.elasticsearch.model.Product">
+    update product
+    set pname = #{pname,jdbcType=VARCHAR},
+      marketPrice = #{marketprice,jdbcType=DOUBLE},
+      shopPrice = #{shopprice,jdbcType=DOUBLE},
+      pimage = #{pimage,jdbcType=VARCHAR},
+      isHot = #{ishot,jdbcType=INTEGER},
+      pdesc = #{pdesc,jdbcType=VARCHAR},
+      pflag = #{pflag,jdbcType=INTEGER},
+      cid = #{cid,jdbcType=VARCHAR},
+      collect = #{collect,jdbcType=INTEGER}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+</mapper>
